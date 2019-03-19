@@ -60,4 +60,14 @@
         <item>@string/pref_num_of_images_10</item>
     </string-array>
 
+    <string-array name="pref_theme_color_entries">
+        <item>@string/pref_theme_color_entry_light</item>
+        <item>@string/pref_theme_color_entry_dark</item>
+    </string-array>
+
+    <string-array name="pref_theme_color_values">
+        <item>@string/pref_theme_color_value_light</item>
+        <item>@string/pref_theme_color_value_dark</item>
+    </string-array>
+
 </resources>

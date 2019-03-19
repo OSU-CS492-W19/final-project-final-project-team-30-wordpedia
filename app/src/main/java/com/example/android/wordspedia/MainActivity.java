@@ -3,6 +3,9 @@ package com.example.android.wordspedia;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -26,7 +29,7 @@ import android.support.v7.widget.SearchView;
 import com.example.android.wordspedia.data.WordPreference;
 import com.example.android.wordspedia.utils.WordsUtils;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SharedPreferences.OnSharedPreferenceChangeListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String VIEWMODEL_KEY = "WordViewModel";
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
             }
         });
+
     }
 
     @Override
@@ -159,6 +163,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return false;
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.d("Prefs", "There was a preferences change!");
+        if (key.equals(getString(R.string.pref_theme_color_key))) {
+            Log.d("ThemeColor", sharedPreferences.getString(getString(R.string.pref_theme_color_key), getString(R.string.pref_theme_color_default)));
+            if (sharedPreferences.getString(getString(R.string.pref_theme_color_key), getString(R.string.pref_theme_color_default)).equals("dark")) {
+//                mWordTV.setBackgroundColor(getResources().getColor(R.color.LightSlateGray));
+//                mWordTV.setTextColor(getResources().getColor(R.color.White));
+                findViewById(R.id.mainframe_fl).setBackgroundColor(getResources().getColor(R.color.LightSlateGray));
+                Log.d("ThemeColor", "Changing to dark theme..");
+            } else if (sharedPreferences.getString(getString(R.string.pref_theme_color_key), getString(R.string.pref_theme_color_default)).equals("light")) {
+//                mWordTV.setBackgroundColor(getResources().getColor(R.color.White));
+//                mWordTV.setTextColor(getResources().getColor(R.color.LightSlateGray));
+                findViewById(R.id.mainframe_fl).setBackgroundColor(getResources().getColor(R.color.White));
+                Log.d("ThemeColor", "Changing to light theme..");
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d("Prefs", "Prefs being registered..");
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 
     public String getURL(){

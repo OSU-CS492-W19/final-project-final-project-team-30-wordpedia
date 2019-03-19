@@ -10,4 +10,13 @@
         android:entryValues="@array/pref_num_of_images_values"
         android:defaultValue="@string/pref_num_of_images_default"/>
 
+    <ListPreference
+        android:key="pref_theme_color"
+        android:title="Theme Color"
+        android:summary="%s"
+        android:dialogTitle="Theme Color"
+        android:entries="@array/pref_theme_color_entries"
+        android:entryValues="@array/pref_theme_color_values"
+        android:defaultValue="@string/pref_theme_color_value_dark"/>
+
 </PreferenceScreen>

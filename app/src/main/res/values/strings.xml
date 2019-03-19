@@ -83,6 +83,15 @@
     <string name="pref_user_key" translatable="false">pref_user</string>
     <string name="pref_user_title">GitHub user</string>
 
+    <!-- Strings for theme preference -->
+    <string name="pref_theme_color_key">pref_theme_color</string>
+    <string name="pref_theme_color_title">Theme Color</string>
+    <string name="pref_theme_color_default">dark</string>
+    <string name="pref_theme_color_entry_light">Light</string>
+    <string name="pref_theme_color_value_light">light</string>
+    <string name="pref_theme_color_entry_dark">Dark</string>
+    <string name="pref_theme_color_value_dark">dark</string>
+
 
     <string name="definition_header">Definition</string>
     <string name="part_of_speech_header">Part Of Speech</string>
